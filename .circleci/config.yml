@@ -15,17 +15,17 @@ jobs:
       - run: cd 3w5-h24-tp2-frontend && npm install
       - run: cd 3w5-h24-tp2-frontend && npm run build
       - run: cp -rT 3w5-h24-tp2-frontend/build 3w5-h24-tp2-backend/public 
-      persist_to_workspace:
-          root: .
-          paths:
-            - 3w5-h24-tp2-backend
+      # persist_to_workspace:
+      #   root: .
+      #   paths:
+      #     - 3w5-h24-tp2-backend
 
-  deploiement:
-    machine: true
-    steps:
-      - attach_workspace:
-          at: .
-      - run: cd 3w5-h24-tp2-backend && ls -Rl
+  # deploiement:
+  #   machine: true
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run: cd 3w5-h24-tp2-backend && ls -Rl
 
 workflows:
   build:
@@ -34,6 +34,6 @@ workflows:
       - integrationFrontend:
           requires:
             - checkoutEtTests
-      - deploiement:
-          requires:
-            - integrationFrontend
+      # - deploiement:
+      #     requires:
+      #       - integrationFrontend
