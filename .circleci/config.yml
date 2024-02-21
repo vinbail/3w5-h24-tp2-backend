@@ -5,7 +5,8 @@ jobs:
     machine: true
     steps:
       - run: git clone https://github.com/vinbail/3w5-h24-tp2-backend.git
-      - run: cd 3w5-h24-tp2-backend && ls -al
+      - run: cd 3w5-h24-tp2-backend && npm install
+      - run: cd 3w5-h24-tp2-backend && npm run test
   # integrationFrontend:
   #   machine: true
   #   steps:
