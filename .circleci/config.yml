@@ -7,17 +7,33 @@ jobs:
       - run: git clone https://github.com/vinbail/3w5-h24-tp2-backend.git
       - run: cd 3w5-h24-tp2-backend && npm install
       - run: cd 3w5-h24-tp2-backend && npm run test
-  # integrationFrontend:
-  #   machine: true
-  #   steps:
-  #     - run: echo "second job, first step"
-  #     - run: echo "second job, second step"
-  # deploiement:
-  #   machine: true
-  #   steps:
-  #     - run: echo "Continuing from job 1 and 2, to job 3"
+  integrationFrontend:
+    machine: true
+    steps:
+      - run: git clone https://github.com/vinbail/3w5-h24-tp2-backend.git
+      - run: git clone https://github.com/vinbail/3w5-h24-tp2-frontend.git
+      - run: cd 3w5-h24-tp2-frontend && npm install
+      - run: cd 3w5-h24-tp2-frontend && npm run build
+      - run: cp -rT 3w5-h24-tp2-frontend/build 3w5-h24-tp2-backend/public 
+      persist_to_workspace:
+          root: .
+          paths:
+            - 3w5-h24-tp2-backend
+
+  deploiement:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run: cd 3w5-h24-tp2-backend && ls -Rl
 
 workflows:
   build:
     jobs:
       - checkoutEtTests
+      - integrationFrontend:
+          requires:
+            - checkoutEtTests
+      - deploiement:
+          requires:
+            - integrationFrontend
