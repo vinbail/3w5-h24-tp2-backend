@@ -5,9 +5,7 @@ jobs:
     machine: true
     steps:
       - run: git clone https://github.com/vinbail/3w5-h24-tp2-backend.git
-      - run: ls -a
-      - run: cd /3w5-h24-tp2-backend
-      - run: ls -a
+      - run: cd 3w5-h24-tp2-backend && ls -al
   # integrationFrontend:
   #   machine: true
   #   steps:
