@@ -1,0 +1,46 @@
+version: 2.1
+
+jobs:
+  job1:
+    machine: true
+    steps:
+      - run: echo "first job group, single step"
+  job2:
+    machine: true
+    steps:
+      - run: echo "second job, first step"
+      - run: echo "second job, second step"
+  job3:
+    machine: true
+    steps:
+      - run: echo "Continuing from job 1 and 2, to job 3"
+  job4:
+    machine: true
+    steps:
+      - run: echo "fourth job group, single step"
+  job5:
+    machine: true
+    steps:
+      - run: echo "fifth job, first step"
+      - run: echo "fifth job, second step"
+  job6:
+    machine: true
+    steps:
+      - run: echo "Continuing from job 4 and 5, to job 6"
+
+workflows:
+  build:
+    jobs:
+      - job1
+      - job2
+      - job3:
+          requires:
+            - job1
+            - job2
+      - job4
+      - job5
+      - job6:
+          requires:
+            - job3
+            - job4
+            - job5
