@@ -20,16 +20,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - job1
-      - job2
-      - job3:
-          requires:
-            - job1
-            - job2
-      - job4
-      - job5
-      - job6:
-          requires:
-            - job3
-            - job4
-            - job5
+      -checkoutEtTests
