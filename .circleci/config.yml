@@ -20,12 +20,12 @@ jobs:
           paths:
             - 3w5-h24-tp2-backend
 
-  # deploiement:
-  #   machine: true
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run: cd 3w5-h24-tp2-backend && ls -Rl
+  deploiement:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run: cd 3w5-h24-tp2-backend && ls -Rl
 
 workflows:
   build:
@@ -34,6 +34,6 @@ workflows:
       - integrationFrontend:
           requires:
             - checkoutEtTests
-      # - deploiement:
-      #     requires:
-      #       - integrationFrontend
+      - deploiement:
+          requires:
+            - integrationFrontend
